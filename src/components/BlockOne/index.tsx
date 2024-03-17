@@ -26,18 +26,18 @@ const BlockOne: FC = () => {
 
   const clear = () => {
     if (textInput.current) {
-      textInput.current.value = '';
+      setFact('');
       textInput.current.focus();
     }
   };
   useEffect(() => {
     query && getData();
     if (textInput.current) {
-      const first = fact.split(' ')[0].length;
-      textInput.current.setSelectionRange(first, first);
+      const firstWord = fact.split(' ')[0];
+      textInput.current.setSelectionRange(firstWord.length, firstWord.length);
       textInput.current.focus();
     }
-  }, [query]);
+  }, [query, fact]);
 
   if (loading) {
     return <Spinner size="medium" />;
@@ -50,6 +50,7 @@ const BlockOne: FC = () => {
           getRef={textInput}
           type="text"
           value={fact}
+          onChange={(e) => setFact(e.target.value)}
           placeholder="Факт о котах"
           after={
             <IconButton hoverMode="opacity" label="Очистить поле" onClick={clear}>
@@ -60,7 +61,7 @@ const BlockOne: FC = () => {
       </FormItem>
       <FormItem>
         <Button align={'center'} rounded={true} size={'m'} onClick={() => setQuery(true)}>
-          Выполнить запрос
+          Get fact
         </Button>
       </FormItem>
     </FormLayoutGroup>
