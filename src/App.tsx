@@ -19,6 +19,7 @@ import BlockOne from './components/BlockOne';
 const App: FC = () => {
   const platform = usePlatform();
   const [activeView, setActiveView] = useState('view1');
+  
   return (
     <AppRoot>
       <SplitLayout header={platform !== 'vkcom' && <PanelHeader delimiter="none" />}>
